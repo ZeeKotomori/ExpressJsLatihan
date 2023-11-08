@@ -29,6 +29,6 @@ app.get('/drinks', (req, res) => { //get a object data
 
 app.post('/drinks', (req , res) => { //created a object data
     console.log(req.body);
-    drinks.push(req.body); // dataType = JSONhttps://github.com/ZeeKotomori/ExpressJsLatihan.git
+    drinks.push(req.body); // dataType = JSON
     res.send(201);
 });
