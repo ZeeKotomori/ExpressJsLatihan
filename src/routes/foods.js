@@ -4,14 +4,17 @@ const router = Router();
 
 const foods = [
     {
+        id: 1,
         item: 'Basreng',
         quantity: 20
     },
     {
+        id: 2,
         item: 'Batagor',
         quantity: 10
     },
     {
+        id: 3,
         item: 'Baso',
         quantity: 5
     },
