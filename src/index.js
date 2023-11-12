@@ -1,6 +1,7 @@
 const express = require('express');
 const drinksRouter = require('./routes/drinks.js'); //export data file drinks.js dari ./routes/
 const foodRouter = require('./routes/foods.js');
+const marketRouter = require('./routes/markets.js');
 
 const app = express();
 const PORT = 3001;
@@ -15,5 +16,6 @@ app.use((req, res, next) => { //next adalah fungsi yang harus dipanggil untuk me
 
 app.use('/api/v1/drinks', drinksRouter); //Menambahkan base path atau prefix path ini dapat membantu dalam pengorganisasian rute-rute API, terutama jika berencana untuk mengembangkan versi API yang berbeda di masa depan. Ini juga membantu memisahkan rute-rute yang berkaitan dengan minuman (drinks) dari rute-rute lain yang mungkin ada di dalam aplikasi Anda.
 app.use('/api/v1/foods', foodRouter);
+app.use('/api/v1/markets', marketRouter);
 
 app.listen(PORT, () => console.log(`server run on port ${PORT}`)); //port
