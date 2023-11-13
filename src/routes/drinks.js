@@ -18,11 +18,15 @@ const drinks = [ //obejct data
 ]
 
 router.get('/', (req, res) => { //get a object data
+    res.cookie('visited', true, { //menambah cookies yang memiliki nama "visited" dan bervalue true
+        maxAge: 10000, //umur cookies (10 detik)
+    });
     res.send(drinks);
 });
 
 router.get('/:item', (req, res) => { //item = set parameter, :item adalah parameter dinamis yang dapat diambil dari URL. Saat sebuah permintaan HTTP diterima, Express.js dapat menangkap nilai yang diberikan pada bagian URL yang sesuai dengan parameter tersebut.
     // console.log(req.params.item); //item = get parameter
+    console.log(req.cookies); //mengeluarkan cookies ke console log
     const { item } = req.params; //Dalam kode const { item } = req.params;, kita menggunakan destructuring assignment untuk mengekstrak nilai dari properti item dalam objek req.params. `{ item }` = const item = req.params.item;
     const drinksItem = drinks.find((g) => g.item === item); //const drinksItem = drinks.find((g) => g.item === item);, kita menggunakan metode find() untuk mencari objek dalam array drinks yang memiliki properti item yang sama dengan nilai dari parameter dinamis yang diambil dari URL. (g) => g.item === item adalah fungsi untuk memeriksa apakah properti item dari object dalam array drinks nilainya sama dengan :item, bila ada akan memunculkan data, bila tidak akan memunculkan undifined.
     res.send(drinksItem);
