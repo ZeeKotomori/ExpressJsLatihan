@@ -1,8 +1,9 @@
 const express = require('express');
+const session = require('express-session')
+const cookieParser = require('cookie-parser');
 const drinksRouter = require('./routes/drinks.js'); //export data file drinks.js dari ./routes/
 const foodRouter = require('./routes/foods.js');
 const marketRouter = require('./routes/markets.js');
-const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = 3001;
@@ -10,6 +11,13 @@ const PORT = 3001;
 app.use(express.json()); //Middleware express.json() digunakan untuk mem-parsing (mengurai) data permintaan HTTP yang dikirim dalam format JSON. JSON -> OBJECT
 app.use(express.urlencoded()); //Middleware express.urlencoded() digunakan untuk mem-parsing data permintaan HTTP yang dikirim dalam format URL-encoded. Ini adalah format standar untuk mengirim data formulir melalui permintaan HTTP.
 app.use(cookieParser());//Middleware: cookie-parser adalah middleware khusus yang dirancang untuk mem-parsing cookie yang dikirimkan oleh klien.Middleware ini memecah cookie yang dikirimkan dalam header permintaan HTTP dan menyusunnya ke dalam objek req.cookies.
+app.use(
+    session({
+    secret: 'MKJLCajfiNKLNcnaOLO&ASd8&*786%&%(A09dAAC&87&^5&CA^&C8(0c87C(*A899AYC&v97ysdysh(*',
+    resave: false,
+    saveUninitialized: false,
+    })
+);
 app.use((req, res, next) => { //next adalah fungsi yang harus dipanggil untuk melanjutkan eksekusi ke middleware berikutnya atau ke penanganan rute jika diperlukan.
     console.log(`${req.method}:${req.url}`); //${req.method} mengambil metode HTTP dari objek permintaan, seperti "GET," "POST," atau "PUT.", ${req.url} mengambil URL permintaan.
     next(); // fungsi next(), yang mengindikasikan bahwa middleware ini telah selesai menjalankan tugasnya dan harus melanjutkan eksekusi ke middleware berikutnya
