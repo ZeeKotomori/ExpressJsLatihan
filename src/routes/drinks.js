@@ -37,5 +37,30 @@ router.post('/', (req , res) => { //created a object data
     drinks.push(req.body); // dataType = JSON
     res.send(201);
 });
+    
+router.get('/shopping/cart', (req, res) => {
+    const { cart } = req.session; // untuk mencoba mengekstrak nilai dari properti cart dari objek req.session dan menyimpannya ke dalam variabel cart.
+    console.log('CART');
+    if (!cart){
+        res.send("you have no cart session");
+    } else {
+        res.send(cart);
+    }
+});
+
+router.post('/shopping/cart/item', (req, res) => {
+    const { item, quantity } = req.body; // Mendapatkan item dan quantity dari body permintaan
+    const cartItem = { item, quantity }; //: Membuat objek cartItem yang berisi item dan quantity dari body permintaan. Ini akan menjadi objek yang akan ditambahkan ke dalam keranjang (cart).
+    const { cart } = req.session; // Mendapatkan nilai dari properti 'cart' pada objek session
+    if (cart) { // Memeriksa apakah ada cart pada session atau tidak
+        req.session.cart.items.push(cartItem); // Jika 'cart' sudah ada, tambahkan ncartItem ke dalam array 'items' yang ada di dalam 'cart'
+    }else{
+        req.session.cart = { // Bila tidak ada 'cart' maka
+            items : [cartItem], // Buat objek 'cart' baru dengan array 'items' yang berisi cartItem
+        }
+    }
+    // console.log(cartItem);
+    res.send(201); // Mengirimkan session ID sebagai respons
+});
 
 module.exports = router;
